@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.cycle.core.dao.entities.CycleRolePermission;
-import cn.onlov.cycle.core.dao.mapper.CycleRolePermissionMapper;
-import cn.onlov.cycle.core.dao.interfaces.ICycleRolePermissionService;
+import cn.onlov.evaluate.core.dao.entities.CycleRolePermission;
+import cn.onlov.evaluate.core.dao.interfaces.ICycleRolePermissionService;
+import cn.onlov.evaluate.core.dao.mapper.CycleRolePermissionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

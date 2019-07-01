@@ -1,12 +1,11 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.cycle.core.dao.entities.CyclePermission;
-import cn.onlov.cycle.core.dao.mapper.CyclePermissionMapper;
-import cn.onlov.cycle.core.dao.interfaces.ICyclePermissionService;
+import cn.onlov.evaluate.core.dao.entities.CyclePermission;
+import cn.onlov.evaluate.core.dao.interfaces.ICyclePermissionService;
+import cn.onlov.evaluate.core.dao.mapper.CyclePermissionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 

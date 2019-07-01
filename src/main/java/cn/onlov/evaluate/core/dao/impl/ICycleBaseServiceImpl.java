@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.cycle.core.dao.entities.CycleBase;
-import cn.onlov.cycle.core.dao.mapper.CycleBaseMapper;
-import cn.onlov.cycle.core.dao.interfaces.ICycleBaseService;
+import cn.onlov.evaluate.core.dao.entities.CycleBase;
+import cn.onlov.evaluate.core.dao.interfaces.ICycleBaseService;
+import cn.onlov.evaluate.core.dao.mapper.CycleBaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

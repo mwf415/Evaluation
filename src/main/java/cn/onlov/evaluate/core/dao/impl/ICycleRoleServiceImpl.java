@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.cycle.core.dao.entities.CycleRole;
-import cn.onlov.cycle.core.dao.mapper.CycleRoleMapper;
-import cn.onlov.cycle.core.dao.interfaces.ICycleRoleService;
+import cn.onlov.evaluate.core.dao.entities.CycleRole;
+import cn.onlov.evaluate.core.dao.interfaces.ICycleRoleService;
+import cn.onlov.evaluate.core.dao.mapper.CycleRoleMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
