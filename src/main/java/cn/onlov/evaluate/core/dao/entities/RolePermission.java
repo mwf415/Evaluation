@@ -19,19 +19,22 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class CycleUserRole implements Serializable {
+public class RolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
         /**
-     * 用户id
+     * 角色id
      */
-         private Long uid;
+         private Integer rid;
 
-    private Long rid;
+        /**
+     * 权限id
+     */
+         private Integer pid;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
 
 }

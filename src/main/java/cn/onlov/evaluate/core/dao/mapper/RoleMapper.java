@@ -15,7 +15,7 @@ import java.util.List;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface CycleRoleMapper extends BaseMapper<CycleRole> {
+public interface RoleMapper extends BaseMapper<CycleRole> {
 
     @Select(  "   SELECT r.* FROM cycle_role r" +
             "LEFT JOIN cycle_user_role ur ON r.roleId=ur.rid" +

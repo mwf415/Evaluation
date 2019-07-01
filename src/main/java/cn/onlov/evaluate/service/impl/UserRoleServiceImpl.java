@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.service.impl;
 
-import cn.onlov.evaluate.core.dao.entities.CycleUserRole;
-import cn.onlov.evaluate.core.dao.interfaces.ICycleUserRoleService;
+import cn.onlov.evaluate.core.dao.entities.UserRole;
+import cn.onlov.evaluate.core.dao.interfaces.IUserRoleService;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import cn.onlov.evaluate.service.CycleUserRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -18,23 +18,23 @@ public class UserRoleServiceImpl implements CycleUserRoleService {
     private CyclePermissionService cyclePermissionService;
 
     @Resource
-    private ICycleUserRoleService iCycleUserRoleService;
+    private IUserRoleService iUserRoleService;
 
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = {Exception.class})
     public void addUserRole(long userId, Long[] roleIds) {
-        QueryWrapper<CycleUserRole> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
 
-        iCycleUserRoleService.remove(queryWrapper.lambda().eq(CycleUserRole::getUid, userId));
+        iUserRoleService.remove(queryWrapper.lambda().eq(UserRole::getUid, userId));
 
 
         //添加
         for (Long roleId : roleIds) {
-            CycleUserRole u = new CycleUserRole();
+            UserRole u = new UserRole();
             u.setUid(userId);
             u.setRid(roleId);
-            iCycleUserRoleService.saveOrUpdate(u);
+            iUserRoleService.saveOrUpdate(u);
         }
         /**
          * 更新权限

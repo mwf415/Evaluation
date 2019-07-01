@@ -13,7 +13,7 @@ import java.util.List;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface ICycleRoleService extends IService<CycleRole> {
+public interface IRoleService extends IService<CycleRole> {
 
     List<CycleRole> queryRoleListByUserId(Integer roleId);
 

@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.core.dao.interfaces;
 
-import cn.onlov.evaluate.core.dao.entities.CycleUserRole;
+import cn.onlov.evaluate.core.dao.entities.RolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface ICycleUserRoleService extends IService<CycleUserRole> {
+public interface IRolePermissionService extends IService<RolePermission> {
 
 }

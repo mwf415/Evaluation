@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.controller;
 
 import cn.onlov.evaluate.core.dao.entities.CycleRole;
-import cn.onlov.evaluate.core.dao.interfaces.ICycleRoleService;
+import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.CycleRoleBo;
 import cn.onlov.evaluate.service.CycleRolePermissionService;
 import cn.onlov.evaluate.service.CycleRoleService;
@@ -32,7 +32,7 @@ public class RoleController {
 
 
     @Autowired
-    private ICycleRoleService iCycleRoleService;
+    private IRoleService iRoleService;
 
     @RequestMapping
     public  Map<String,Object> getAll(CycleRole role, String draw,
@@ -76,7 +76,7 @@ public class RoleController {
     @RequestMapping(value = "/add")
     public String add(CycleRole role) {
         try {
-            iCycleRoleService.saveOrUpdate(role);
+            iRoleService.saveOrUpdate(role);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class RoleController {
     @RequestMapping(value = "/delete")
     public String delete(Integer id){
         try{
-            iCycleRoleService.removeById(id);
+            iRoleService.removeById(id);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

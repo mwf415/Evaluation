@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.onlov.evaluate.core.dao.entities.CyclePermission;
+import cn.onlov.evaluate.core.dao.entities.Permission;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
@@ -37,8 +37,8 @@ public class ShiroService {
         filterChainDefinitionMap.put("/myExams/**","authc");
         filterChainDefinitionMap.put("/plugins/**","anon");
         filterChainDefinitionMap.put("/font-awesome/**","anon");
-        List<CyclePermission> permissionsList = cyclePermissionService.queryAll();
-        for(CyclePermission permissions:permissionsList){
+        List<Permission> permissionsList = cyclePermissionService.queryAll();
+        for(Permission permissions:permissionsList){
 
             if (!StringUtils.isEmpty(permissions.getUrl())) {
                 String permission = "perms[" + permissions.getUrl()+ "]";

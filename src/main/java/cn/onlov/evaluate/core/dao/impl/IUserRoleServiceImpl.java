@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.evaluate.core.dao.entities.CycleUserRole;
-import cn.onlov.evaluate.core.dao.interfaces.ICycleUserRoleService;
+import cn.onlov.evaluate.core.dao.entities.UserRole;
+import cn.onlov.evaluate.core.dao.interfaces.IUserRoleService;
 import cn.onlov.evaluate.core.dao.mapper.CycleUserRoleMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2019-01-04
  */
 @Service
-public class ICycleUserRoleServiceImpl extends ServiceImpl<CycleUserRoleMapper, CycleUserRole> implements ICycleUserRoleService {
+public class IUserRoleServiceImpl extends ServiceImpl<CycleUserRoleMapper, UserRole> implements IUserRoleService {
 
 }

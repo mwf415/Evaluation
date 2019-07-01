@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.service.impl;
 
 import cn.onlov.evaluate.core.dao.entities.CycleRole;
-import cn.onlov.evaluate.core.dao.interfaces.ICycleRoleService;
+import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.CycleRoleBo;
 import cn.onlov.evaluate.service.CycleRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class CycleRoleServiceImpl  implements CycleRoleService {
     @Autowired
-    private ICycleRoleService iCycleRoleService;
+    private IRoleService iRoleService;
 
     @Override
     public List<CycleRole> queryCycleRoleListWithSelected(Integer uid) {
@@ -34,7 +34,7 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
         IPage<CycleRole> page = new Page<>();
         page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
 
-        IPage<CycleRole> res = iCycleRoleService.page(page, new QueryWrapper<CycleRole>().lambda());
+        IPage<CycleRole> res = iRoleService.page(page, new QueryWrapper<CycleRole>().lambda());
 
         return res;
     }
@@ -42,13 +42,13 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
     @Override
     public void delCycleRole(Integer roleid) {
         QueryWrapper<CycleRole> queryWrapper =  new QueryWrapper<>();
-        iCycleRoleService.remove(queryWrapper.lambda().eq(CycleRole::getRoleId ,roleid));
+        iRoleService.remove(queryWrapper.lambda().eq(CycleRole::getRoleId ,roleid));
     }
 
     @Override
     public List<CycleRole> queryCycleRoleListByUserId(Integer userId) {
         QueryWrapper<CycleRole> queryWrapper =  new QueryWrapper<>();
-        List<CycleRole> cycleRoles = iCycleRoleService.queryRoleListByUserId(userId);
+        List<CycleRole> cycleRoles = iRoleService.queryRoleListByUserId(userId);
         return cycleRoles;
     }
 

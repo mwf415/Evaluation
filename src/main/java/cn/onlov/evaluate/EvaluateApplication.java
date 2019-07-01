@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan(basePackages = "cn.onlov.evaluate.core.dao.mapper")
 @EnableTransactionManagement
 @EnableScheduling
-public class CycleApplication {
+public class EvaluateApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CycleApplication.class, args);
+        SpringApplication.run(EvaluateApplication.class, args);
     }
 }

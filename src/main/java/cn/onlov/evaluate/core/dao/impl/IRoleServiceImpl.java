@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.core.dao.impl;
 
 import cn.onlov.evaluate.core.dao.entities.CycleRole;
-import cn.onlov.evaluate.core.dao.interfaces.ICycleRoleService;
-import cn.onlov.evaluate.core.dao.mapper.CycleRoleMapper;
+import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
+import cn.onlov.evaluate.core.dao.mapper.RoleMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +18,15 @@ import java.util.List;
  * @since 2019-01-04
  */
 @Service
-public class ICycleRoleServiceImpl extends ServiceImpl<CycleRoleMapper, CycleRole> implements ICycleRoleService {
+public class IRoleServiceImpl extends ServiceImpl<RoleMapper, CycleRole> implements IRoleService {
 
 
     @Autowired
-    private  CycleRoleMapper cycleRoleMapper;
+    private RoleMapper roleMapper;
 
     @Override
     public List<CycleRole> queryRoleListByUserId(Integer roleId) {
-        List<CycleRole> cycleRoles = cycleRoleMapper.queryRoleListByUserId(roleId);
+        List<CycleRole> cycleRoles = roleMapper.queryRoleListByUserId(roleId);
 
         return cycleRoles;
     }

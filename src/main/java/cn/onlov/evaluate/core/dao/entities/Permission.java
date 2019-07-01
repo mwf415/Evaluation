@@ -10,7 +10,6 @@ import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Transient;
 
 
 /**
@@ -24,7 +23,7 @@ import org.springframework.data.annotation.Transient;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class CyclePermission implements Serializable {
+public class Permission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

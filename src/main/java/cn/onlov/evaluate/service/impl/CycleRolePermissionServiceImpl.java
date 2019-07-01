@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.service.impl;
 
-import cn.onlov.evaluate.core.dao.entities.CycleRolePermission;
-import cn.onlov.evaluate.core.dao.interfaces.ICycleRolePermissionService;
+import cn.onlov.evaluate.core.dao.entities.RolePermission;
+import cn.onlov.evaluate.core.dao.interfaces.IRolePermissionService;
 import cn.onlov.evaluate.service.CycleRolePermissionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CycleRolePermissionServiceImpl  implements CycleRolePermissionService {
    @Autowired
-   private ICycleRolePermissionService iCycleRolePermissionService;
+   private IRolePermissionService iRolePermissionService;
 
 
 	@Override
@@ -23,20 +23,20 @@ public class CycleRolePermissionServiceImpl  implements CycleRolePermissionServi
     @CacheEvict(cacheNames="permissions", allEntries=true)
     public void addRolePermission(Integer rid, Integer[] pids){
 
-		QueryWrapper<CycleRolePermission> queryWrapper =  new QueryWrapper<>() ;
-		iCycleRolePermissionService.remove(queryWrapper.lambda().eq(CycleRolePermission::getRid,rid));
+		QueryWrapper<RolePermission> queryWrapper =  new QueryWrapper<>() ;
+		iRolePermissionService.remove(queryWrapper.lambda().eq(RolePermission::getRid,rid));
         //添加
         for(Integer pid: pids){
-			CycleRolePermission record = new CycleRolePermission();
+			RolePermission record = new RolePermission();
         	record.setRid(rid);
         	record.setPid(pid);
-        	iCycleRolePermissionService.save(record);
+        	iRolePermissionService.save(record);
         }
 	}
 
 	@Override
 	public void deleteByPermissionKeys(String[] ids) {
-		QueryWrapper<CycleRolePermission> queryWrapper =  new QueryWrapper<>() ;
-		iCycleRolePermissionService.remove(queryWrapper.lambda().in(CycleRolePermission::getPid,ids));
+		QueryWrapper<RolePermission> queryWrapper =  new QueryWrapper<>() ;
+		iRolePermissionService.remove(queryWrapper.lambda().in(RolePermission::getPid,ids));
 	}
 }

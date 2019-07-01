@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import cn.onlov.evaluate.core.dao.entities.CyclePermission;
+import cn.onlov.evaluate.core.dao.entities.Permission;
 import cn.onlov.evaluate.core.dao.entities.User;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import cn.onlov.evaluate.service.UserService;
@@ -39,15 +39,15 @@ public class MyShiroRealm extends AuthorizingRealm {
         Integer userId = user.getId();
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("id",userId);
-        List<CyclePermission> loadUserCyclePermissions = null;
+        List<Permission> loadUserPermissions = null;
         if(userId == 1){
-        	loadUserCyclePermissions = cyclePermissionService.queryAll();
+        	loadUserPermissions = cyclePermissionService.queryAll();
         }else{
-        	loadUserCyclePermissions = cyclePermissionService.loadUserCyclePermissions(map);
+        	loadUserPermissions = cyclePermissionService.loadUserCyclePermissions(map);
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        for(CyclePermission CyclePermissions: loadUserCyclePermissions){
-            info.addStringPermission(CyclePermissions.getUrl());
+        for(Permission permissions : loadUserPermissions){
+            info.addStringPermission(permissions.getUrl());
         }
         return info;
     }
