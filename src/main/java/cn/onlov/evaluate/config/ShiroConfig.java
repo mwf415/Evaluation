@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import cn.onlov.evaluate.shiro.MyShiroRealm;
 import org.apache.commons.lang3.StringUtils;
@@ -100,12 +100,12 @@ public class ShiroConfig {
         //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         //自定义加载权限资源关系
-        List<Permission> permissionList = cyclePermissionService.queryAll();
-         for(Permission permission: permissionList){
+        List<OnlovPermission> onlovPermissionList = cyclePermissionService.queryAll();
+         for(OnlovPermission onlovPermission : onlovPermissionList){
 
-            if (StringUtils.isNotEmpty(permission.getUrl())) {
-                String perm = "perms[" + permission.getUrl()+ "]";
-                filterChainDefinitionMap.put(permission.getUrl(),perm);
+            if (StringUtils.isNotEmpty(onlovPermission.getUrl())) {
+                String perm = "perms[" + onlovPermission.getUrl()+ "]";
+                filterChainDefinitionMap.put(onlovPermission.getUrl(),perm);
             }
         }
         filterChainDefinitionMap.put("/**", "authc");

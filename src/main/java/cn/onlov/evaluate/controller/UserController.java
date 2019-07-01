@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.controller;
 
-import cn.onlov.evaluate.core.dao.entities.User;
+import cn.onlov.evaluate.core.dao.entities.OnlovUser;
 import cn.onlov.evaluate.core.dao.interfaces.IUserService;
-import cn.onlov.evaluate.pojo.bo.UserBo;
+import cn.onlov.evaluate.pojo.bo.OnlovUserBo;
 import cn.onlov.evaluate.service.CycleUserRoleService;
 import cn.onlov.evaluate.service.UserService;
 import cn.onlov.evaluate.util.PasswordHelper;
@@ -34,17 +34,17 @@ public class UserController {
     private CycleUserRoleService userRoleService;
 
     @RequestMapping
-    public Map<String,Object> getAll(User user, String draw,
+    public Map<String,Object> getAll(OnlovUser onlovUser, String draw,
                                      @RequestParam(required = false, defaultValue = "1") int start,
                                      @RequestParam(required = false, defaultValue = "10") int length){
         Map<String,Object> map = new HashMap<>();
-        UserBo bo  = new UserBo();
-        BeanUtils.copyProperties(user,bo);
+        OnlovUserBo bo  = new OnlovUserBo();
+        BeanUtils.copyProperties(onlovUser,bo);
         start = start/length;
         bo.setCurr(start);
         bo.setPageSize(length);
 
-        IPage<User> pageInfo = userService.getBusinessPageUser(bo);
+        IPage<OnlovUser> pageInfo = userService.getBusinessPageUser(bo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -72,17 +72,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/add")
-    public String add(User user) {
-        User u = userService.selectByLoginName(user.getLoginName());
+    public String add(OnlovUser onlovUser) {
+        OnlovUser u = userService.selectByLoginName(onlovUser.getLoginName());
         if(u != null)
             return "error";
         try {
-//            user.setEnable(1);
+//            onlovUser.setEnable(1);
             PasswordHelper passwordHelper = new PasswordHelper();
-            passwordHelper.encryptPassword(user);
-            user.setIdentityId(1);
-            user.setStatus(1+"");
-            iUserService.save(user);
+            passwordHelper.encryptPassword(onlovUser);
+            onlovUser.setIdentityId(1);
+            onlovUser.setStatus(1+"");
+            iUserService.save(onlovUser);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,16 +107,16 @@ public class UserController {
                              String[] baseNames, String[] roomNames,
                              Integer[] identity_ids, Integer[] grades, Integer[] trainTimes){
       try{
-          List<User>userList = userService.selectByLoginNames(loginNames);
+          List<OnlovUser> onlovUserList = userService.selectByLoginNames(loginNames);
           Map<String,Integer> map = new HashMap<>();
           for (int i = 0; i < loginNames.length; i++) {
             map.put(loginNames[i],i);
           }
 
-          if(userList.size()>0){
+          if(onlovUserList.size()>0){
               StringBuilder sb = new StringBuilder();
-              for (User user : userList) {
-                  String loginName = user.getLoginName();
+              for (OnlovUser onlovUser : onlovUserList) {
+                  String loginName = onlovUser.getLoginName();
                   Integer i = map.get(loginName);
                  String realName = real_names[i];
                   sb.append(realName+";");
@@ -134,21 +134,21 @@ public class UserController {
              Integer identity_id = identity_ids[i];
              Integer grade = grades[i];
              int trainTime = trainTimes[i];
-             User user = new User();
-             user.setLoginName(loginName);
-              user.setUserNum(userNum);
-              user.setRealName(real_name);
+             OnlovUser onlovUser = new OnlovUser();
+             onlovUser.setLoginName(loginName);
+              onlovUser.setUserNum(userNum);
+              onlovUser.setRealName(real_name);
 
-              user.setUserPwd(user_pwd.trim());
-              user.setBaseName(baseName);
-              user.setRoomName(roomName);
-              user.setIdentityId(identity_id);
-              user.setGrade(grade);
-              user.setTrainTime(trainTime);
-              user.setStatus(1+"");
+              onlovUser.setUserPwd(user_pwd.trim());
+              onlovUser.setBaseName(baseName);
+              onlovUser.setRoomName(roomName);
+              onlovUser.setIdentityId(identity_id);
+              onlovUser.setGrade(grade);
+              onlovUser.setTrainTime(trainTime);
+              onlovUser.setStatus(1+"");
               PasswordHelper passwordHelper = new PasswordHelper();
-              passwordHelper.encryptPassword(user);
-              iUserService.save(user);
+              passwordHelper.encryptPassword(onlovUser);
+              iUserService.save(onlovUser);
           }
 
           return "success";

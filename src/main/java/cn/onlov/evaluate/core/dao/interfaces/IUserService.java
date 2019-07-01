@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.core.dao.interfaces;
 
-import cn.onlov.evaluate.core.dao.entities.User;
+import cn.onlov.evaluate.core.dao.entities.OnlovUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface IUserService extends IService<User> {
+public interface IUserService extends IService<OnlovUser> {
 
 }

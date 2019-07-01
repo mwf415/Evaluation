@@ -1,16 +1,16 @@
 package cn.onlov.evaluate.service;
 
-import cn.onlov.evaluate.core.dao.entities.CycleRole;
-import cn.onlov.evaluate.pojo.bo.CycleRoleBo;
+import cn.onlov.evaluate.core.dao.entities.OnlovRole;
+import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
 
 public interface CycleRoleService  {
 
-    public List<CycleRole> queryCycleRoleListWithSelected(Integer uid);
+    public List<OnlovRole> queryCycleRoleListWithSelected(Integer uid);
 
-    IPage<CycleRole> selectByPage(CycleRoleBo CycleRole);
+    IPage<OnlovRole> selectByPage(OnlovRoleBo CycleRole);
 
     /**
      * 删除角色 同时删除角色资源表中的数据
@@ -21,8 +21,8 @@ public interface CycleRoleService  {
     /**
      * @Description:获取用户角色
      * @fieldName:
-     * @return: List<CycleRole>
+     * @return: List<OnlovRole>
      */
-    public List<CycleRole> queryCycleRoleListByUserId(Integer userId);
+    public List<OnlovRole> queryCycleRoleListByUserId(Integer userId);
 
 }

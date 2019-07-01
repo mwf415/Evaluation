@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class CycleRole implements Serializable {
+public class OnlovRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -44,6 +44,9 @@ public class CycleRole implements Serializable {
      */
          @TableField("roleDes")
     private String roleDes;
+
+    @TableField("system_id")
+    private Integer systemId;  //2 规培，2  osce
 
 
 }

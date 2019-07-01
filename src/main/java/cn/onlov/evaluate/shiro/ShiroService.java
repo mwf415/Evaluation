@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
@@ -37,8 +37,8 @@ public class ShiroService {
         filterChainDefinitionMap.put("/myExams/**","authc");
         filterChainDefinitionMap.put("/plugins/**","anon");
         filterChainDefinitionMap.put("/font-awesome/**","anon");
-        List<Permission> permissionsList = cyclePermissionService.queryAll();
-        for(Permission permissions:permissionsList){
+        List<OnlovPermission> permissionsList = cyclePermissionService.queryAll();
+        for(OnlovPermission permissions:permissionsList){
 
             if (!StringUtils.isEmpty(permissions.getUrl())) {
                 String permission = "perms[" + permissions.getUrl()+ "]";
@@ -108,8 +108,8 @@ public class ShiroService {
                 SimplePrincipalCollection spc = (SimplePrincipalCollection)obj;
                 //判断用户，匹配用户ID。
                 obj = spc.getPrimaryPrincipal();
-                if(null != obj && obj instanceof User){
-                    User user = (User) obj;
+                if(null != obj && obj instanceof OnlovUser){
+                    OnlovUser user = (OnlovUser) obj;
                     System.out.println("user:"+user);
                     //比较用户ID，符合即加入集合
                     if(null != user && userIds.contains(user.getId())){

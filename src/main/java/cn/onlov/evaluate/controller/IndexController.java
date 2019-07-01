@@ -40,23 +40,23 @@ public class IndexController {
     }
 
     @RequestMapping(value="/login",method=RequestMethod.POST)
-    public String login(HttpServletRequest request, User user, Model model){
-        if ( !MyStringUtils.isNotEmpty(user.getLoginName()) || !MyStringUtils.isNotEmpty(user.getUserPwd())) {
+    public String login(HttpServletRequest request, OnlovUser onlovUser, Model model){
+        if ( !MyStringUtils.isNotEmpty(onlovUser.getLoginName()) || !MyStringUtils.isNotEmpty(onlovUser.getUserPwd())) {
             request.setAttribute("msg", "用户名或密码不能为空！");
             return "/login";
         }
-        User u = cycleUserService.selectByLoginName(user.getLoginName());
-        if(u==null || u.getIdentityId()!=user.getIdentityId()){
+        OnlovUser u = cycleUserService.selectByLoginName(onlovUser.getLoginName());
+        if(u==null || u.getIdentityId()!= onlovUser.getIdentityId()){
             request.setAttribute("msg", "用户不存在！");
             return "/login";
         }
         UsernamePasswordToken token = null;
         try {
         	Subject subject = SecurityUtils.getSubject();
-        	if(user.getUserPwd()!=null){
-        		token=new UsernamePasswordToken(user.getLoginName(),user.getUserPwd());
+        	if(onlovUser.getUserPwd()!=null){
+        		token=new UsernamePasswordToken(onlovUser.getLoginName(), onlovUser.getUserPwd());
         		subject.login(token);
-        		if(user.getIdentityId()==2)//如果是学生，跳转到学生页面
+        		if(onlovUser.getIdentityId()==2)//如果是学生，跳转到学生页面
         			return "redirect:/myExams/examsPage";
         		return "redirect:usersPage";
         	}
@@ -121,7 +121,7 @@ public class IndexController {
     @RequestMapping("/countPage")
     public String countPage(Model model){
         Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        List<CycleRole> roles = cycleRoleService.queryCycleRoleListByUserId(userId);
+        List<OnlovRole> roles = cycleRoleService.queryCycleRoleListByUserId(userId);
         List<CycleBase> bases = cycleBaseService.selectAll();
         List<CycleRoom> rooms = cycleRoomService.selectAll();
         model.addAttribute("roles", roles);
@@ -132,7 +132,7 @@ public class IndexController {
 
     private Model indexSession(Model model) {
         Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        List<CycleRole> roles = cycleRoleService.queryCycleRoleListByUserId(userId);
+        List<OnlovRole> roles = cycleRoleService.queryCycleRoleListByUserId(userId);
         List<CycleBase> bases = cycleBaseService.selectAll();
         List<CycleRoom> rooms = cycleRoomService.selectAll();
         model.addAttribute("roles", roles);

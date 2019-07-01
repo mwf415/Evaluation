@@ -16,7 +16,7 @@ public class WriteResponseUtil {
 	 */
 	public static String encodeFileName(HttpServletRequest request, String fileName){
 		try {
-			if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > -1) {  
+			if (request.getHeader("OnlovUser-Agent").toUpperCase().indexOf("MSIE") > -1) {
 			 fileName = URLEncoder.encode(fileName, "UTF-8");
 			} else {  
 				fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1");  

@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.service.impl;
 
-import cn.onlov.evaluate.core.dao.entities.UserRole;
+import cn.onlov.evaluate.core.dao.entities.OnlovUserRole;
 import cn.onlov.evaluate.core.dao.interfaces.IUserRoleService;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import cn.onlov.evaluate.service.CycleUserRoleService;
@@ -24,14 +24,14 @@ public class UserRoleServiceImpl implements CycleUserRoleService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = {Exception.class})
     public void addUserRole(long userId, Long[] roleIds) {
-        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<OnlovUserRole> queryWrapper = new QueryWrapper<>();
 
-        iUserRoleService.remove(queryWrapper.lambda().eq(UserRole::getUid, userId));
+        iUserRoleService.remove(queryWrapper.lambda().eq(OnlovUserRole::getUid, userId));
 
 
         //添加
         for (Long roleId : roleIds) {
-            UserRole u = new UserRole();
+            OnlovUserRole u = new OnlovUserRole();
             u.setUid(userId);
             u.setRid(roleId);
             iUserRoleService.saveOrUpdate(u);

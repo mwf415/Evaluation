@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.evaluate.core.dao.entities.CycleRole;
+import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.core.dao.mapper.RoleMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -18,16 +18,16 @@ import java.util.List;
  * @since 2019-01-04
  */
 @Service
-public class IRoleServiceImpl extends ServiceImpl<RoleMapper, CycleRole> implements IRoleService {
+public class IRoleServiceImpl extends ServiceImpl<RoleMapper, OnlovRole> implements IRoleService {
 
 
     @Autowired
     private RoleMapper roleMapper;
 
     @Override
-    public List<CycleRole> queryRoleListByUserId(Integer roleId) {
-        List<CycleRole> cycleRoles = roleMapper.queryRoleListByUserId(roleId);
+    public List<OnlovRole> queryRoleListByUserId(Integer roleId) {
+        List<OnlovRole> onlovRoles = roleMapper.queryRoleListByUserId(roleId);
 
-        return cycleRoles;
+        return onlovRoles;
     }
 }

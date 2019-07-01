@@ -1,17 +1,11 @@
 package cn.onlov.evaluate.pojo.bo;
 
-import cn.onlov.evaluate.core.dao.entities.User;
+import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class UserBo extends User implements Serializable {
-
+public class OnlovRoleBo extends OnlovRole {
     private static final long serialVersionUID = 318399374157993931L;
     private int curr = 0; //当前页数
     private int pageSize = 10;// 每页几行
-
-
-
 }

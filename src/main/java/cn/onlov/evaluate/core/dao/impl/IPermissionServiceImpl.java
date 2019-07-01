@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.core.dao.impl;
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import cn.onlov.evaluate.core.dao.interfaces.IPermissionService;
 import cn.onlov.evaluate.core.dao.mapper.PermissionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -18,21 +18,21 @@ import java.util.List;
  * @since 2019-01-04
  */
 @Service
-public class IPermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
+public class IPermissionServiceImpl extends ServiceImpl<PermissionMapper, OnlovPermission> implements IPermissionService {
 
     @Autowired
     private PermissionMapper permissionMapper;
 
     @Override
-    public List<Permission> loadUserPermissions(int id, int type){
-        List<Permission> list = permissionMapper.loadUserPermissions(id, type);
+    public List<OnlovPermission> loadUserPermissions(int id, int type,int systemId){
+        List<OnlovPermission> list = permissionMapper.loadUserPermissions(id, type ,systemId);
         return list;
     }
 
 
     @Override
-    public List<Permission> queryPermissionsListWithSelected(int rid){
-        List<Permission> list = permissionMapper.queryPermissionsListWithSelected(rid);
+    public List<OnlovPermission> queryPermissionsListWithSelected(int rid ,int systemId){
+        List<OnlovPermission> list = permissionMapper.queryPermissionsListWithSelected(rid,systemId);
         return list;
     }
 

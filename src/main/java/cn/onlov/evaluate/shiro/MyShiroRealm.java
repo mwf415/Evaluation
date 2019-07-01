@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
-import cn.onlov.evaluate.core.dao.entities.User;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
+import cn.onlov.evaluate.core.dao.entities.OnlovUser;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import cn.onlov.evaluate.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -35,18 +35,18 @@ public class MyShiroRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user= (User) SecurityUtils.getSubject().getPrincipal();//User{id=1, username='admin', password='3ef7164d1f6167cb9f2658c07d3c2f0a', enable=1}
-        Integer userId = user.getId();
+        OnlovUser onlovUser = (OnlovUser) SecurityUtils.getSubject().getPrincipal();//OnlovUser{id=1, username='admin', password='3ef7164d1f6167cb9f2658c07d3c2f0a', enable=1}
+        Integer userId = onlovUser.getId();
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("id",userId);
-        List<Permission> loadUserPermissions = null;
+        List<OnlovPermission> loadUserOnlovPermissions = null;
         if(userId == 1){
-        	loadUserPermissions = cyclePermissionService.queryAll();
+        	loadUserOnlovPermissions = cyclePermissionService.queryAll();
         }else{
-        	loadUserPermissions = cyclePermissionService.loadUserCyclePermissions(map);
+        	loadUserOnlovPermissions = cyclePermissionService.loadUserCyclePermissions(map);
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        for(Permission permissions : loadUserPermissions){
+        for(OnlovPermission permissions : loadUserOnlovPermissions){
             info.addStringPermission(permissions.getUrl());
         }
         return info;
@@ -57,17 +57,17 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
     	//获取用户的输入的账号.
         String loginName = (String)authcToken.getPrincipal();
-        User user = cycleUserService.selectByLoginName(loginName);
-        if(user==null) throw new UnknownAccountException();
+        OnlovUser onlovUser = cycleUserService.selectByLoginName(loginName);
+        if(onlovUser ==null) throw new UnknownAccountException();
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user, //用户
-                user.getUserPwd(), //密码
+                onlovUser, //用户
+                onlovUser.getUserPwd(), //密码
                 getName()  //realm name
         );
         // 当验证都通过后，把用户信息放在session里
         Session session = SecurityUtils.getSubject().getSession();
-        session.setAttribute("userSession", user);
-        session.setAttribute("userSessionId", user.getId());
+        session.setAttribute("userSession", onlovUser);
+        session.setAttribute("userSessionId", onlovUser.getId());
         return authenticationInfo;
     }
 

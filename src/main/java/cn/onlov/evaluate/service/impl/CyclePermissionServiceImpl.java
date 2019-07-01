@@ -1,11 +1,11 @@
 package cn.onlov.evaluate.service.impl;
 
 import cn.onlov.evaluate.constants.Constants;
-import cn.onlov.evaluate.core.dao.entities.Permission;
-import cn.onlov.evaluate.core.dao.entities.RolePermission;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
+import cn.onlov.evaluate.core.dao.entities.OnlovRolePermission;
 import cn.onlov.evaluate.core.dao.interfaces.IPermissionService;
 import cn.onlov.evaluate.core.dao.interfaces.IRolePermissionService;
-import cn.onlov.evaluate.pojo.bo.CyclePermissionBo;
+import cn.onlov.evaluate.pojo.bo.CycleOnlovPermissionBo;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -36,86 +36,86 @@ public class CyclePermissionServiceImpl implements CyclePermissionService {
 
 
     @Override
-    public IPage<Permission> selectByPage(CyclePermissionBo bo) {
-        IPage<Permission> page = new Page<>();
+    public IPage<OnlovPermission> selectByPage(CycleOnlovPermissionBo bo) {
+        IPage<OnlovPermission> page = new Page<>();
         page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
 
-        IPage<Permission> res = iPermissionService.page(page, new QueryWrapper<Permission>().lambda().orderByDesc(Permission::getId));
+        IPage<OnlovPermission> res = iPermissionService.page(page, new QueryWrapper<OnlovPermission>().lambda().orderByDesc(OnlovPermission::getId));
         return res;
 
     }
 
     @Override
     @Cacheable(value = "CyclePermissions", key = "'all'")
-    public List<Permission> queryAll() {
-        QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
+    public List<OnlovPermission> queryAll() {
+        QueryWrapper<OnlovPermission> queryWrapper = new QueryWrapper<>();
 
-        List<Permission> list = iPermissionService.list(queryWrapper);
+        List<OnlovPermission> list = iPermissionService.list(queryWrapper);
         return list;
     }
 
     @Override
     @Cacheable(value = "permissions", key = "'all_menu'")
-    public List<Permission> queryAllMenu() {
-        QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(Permission::getSystemId, Constants.SYSTEM_EVALUATE_ID).eq(Permission::getType, Constants.MENU_TYPE).orderByAsc(Permission::getId);
-        List<Permission> list = iPermissionService.list(queryWrapper);
+    public List<OnlovPermission> queryAllMenu() {
+        QueryWrapper<OnlovPermission> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(OnlovPermission::getSystemId, Constants.SYSTEM_EVALUATE_ID).eq(OnlovPermission::getType, Constants.MENU_TYPE).orderByAsc(OnlovPermission::getId);
+        List<OnlovPermission> list = iPermissionService.list(queryWrapper);
         return list;
     }
 
     @Override
     @Cacheable(value = "permissions", key = "'list_'+#map['id'].toString()+'_'+#map['type']")
-    public List<Permission> loadUserCyclePermissions(Map<String, Object> map) {
+    public List<OnlovPermission> loadUserCyclePermissions(Map<String, Object> map) {
         logger.debug("loadUserPermissions id={},type={}", new Object[]{map.get("id"), map.get("type")});
         int id = (int) map.get("id");
         int type = (int) map.get("type");
-        QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
-        List<Permission> list = iPermissionService.loadUserPermissions(id, type);
+        QueryWrapper<OnlovPermission> queryWrapper = new QueryWrapper<>();
+        List<OnlovPermission> list = iPermissionService.loadUserPermissions(id, type,Constants.SYSTEM_EVALUATE_ID);
         return list;
     }
 
     @Override
-    public List<Permission> queryCyclePermissionsListWithSelected(Integer rid) {
-        List<Permission> list = iPermissionService.queryPermissionsListWithSelected(rid);
+    public List<OnlovPermission> queryCyclePermissionsListWithSelected(Integer rid) {
+        List<OnlovPermission> list = iPermissionService.queryPermissionsListWithSelected(rid ,Constants.SYSTEM_EVALUATE_ID);
         return list;
     }
 
     @Override
     @Cacheable(value = "permissions", key = "'tree_'+#userId")
-    public List<Permission> loadUserCyclePermissionsTree(Integer userId) {
+    public List<OnlovPermission> loadUserCyclePermissionsTree(Integer userId) {
         return getPermissions(userId);
     }
 
     @Override
     @CachePut(value = "permissions", key = "'tree_'+#userId")
-    public List<Permission> updateUserCyclePermissionsTree(Integer userId) {
+    public List<OnlovPermission> updateUserCyclePermissionsTree(Integer userId) {
         return getPermissions(userId);
     }
 
-    private List<Permission> getPermissions(Integer userId) {
+    private List<OnlovPermission> getPermissions(Integer userId) {
         logger.debug("loadUserPermissionsTree userId={}", userId);
         Map<String, Object> map = new HashMap();
         map.put("type", 1);
         map.put("id", userId);
-        List<Permission> userPermissions = null;
+        List<OnlovPermission> userOnlovPermissions = null;
         if (userId == 1) {
-            userPermissions = queryAllMenu();
+            userOnlovPermissions = queryAllMenu();
         } else {
-            userPermissions = loadUserCyclePermissions(map);
+            userOnlovPermissions = loadUserCyclePermissions(map);
         }
-        List<Permission> list = getChildren(userPermissions, 0);
+        List<OnlovPermission> list = getChildren(userOnlovPermissions, 0);
         return list;
     }
 
 
     // 取节点的所有children
-    private List<Permission> getChildren(List<Permission> results, Integer rootId) {
+    private List<OnlovPermission> getChildren(List<OnlovPermission> results, Integer rootId) {
 
-        List<Permission> list = new ArrayList();
+        List<OnlovPermission> list = new ArrayList();
         for (int i = 0; i < results.size(); i++) {
-            Permission root = results.get(i);
+            OnlovPermission root = results.get(i);
             if (rootId .equals( root.getPid())) {
-                List<Permission> children = this.getChildren(results, root.getId());
+                List<OnlovPermission> children = this.getChildren(results, root.getId());
                 if (!children.isEmpty()) {
                     root.setChildren(children);
                 }
@@ -130,12 +130,12 @@ public class CyclePermissionServiceImpl implements CyclePermissionService {
         //删除资源
         if (keys != null) {
             //删除关联数据
-            QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
-            iPermissionService.remove(queryWrapper.lambda().in(Permission::getId, keys));
+            QueryWrapper<OnlovPermission> queryWrapper = new QueryWrapper<>();
+            iPermissionService.remove(queryWrapper.lambda().in(OnlovPermission::getId, keys));
 
 
-            QueryWrapper<RolePermission> queryWrapperRole = new QueryWrapper<>();
-            iRolePermissionService.remove(queryWrapperRole.lambda().in(RolePermission::getPid, keys));
+            QueryWrapper<OnlovRolePermission> queryWrapperRole = new QueryWrapper<>();
+            iRolePermissionService.remove(queryWrapperRole.lambda().in(OnlovRolePermission::getPid, keys));
 
         }
     }

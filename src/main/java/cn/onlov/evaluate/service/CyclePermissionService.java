@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.service;
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
-import cn.onlov.evaluate.pojo.bo.CyclePermissionBo;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
+import cn.onlov.evaluate.pojo.bo.CycleOnlovPermissionBo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
@@ -11,12 +11,12 @@ import java.util.Map;
  * Created by yangqj on 2017/4/25.
  */
 public interface CyclePermissionService  {
-	IPage<Permission> selectByPage(CyclePermissionBo CyclePermission);
-	List<Permission> queryAll();
-	List<Permission> queryAllMenu();
-	List<Permission> loadUserCyclePermissions(Map<String, Object> map);
-	List<Permission> queryCyclePermissionsListWithSelected(Integer rid);
-	List<Permission> loadUserCyclePermissionsTree(Integer userId);
-	List<Permission> updateUserCyclePermissionsTree(Integer userId);
+	IPage<OnlovPermission> selectByPage(CycleOnlovPermissionBo CyclePermission);
+	List<OnlovPermission> queryAll();
+	List<OnlovPermission> queryAllMenu();
+	List<OnlovPermission> loadUserCyclePermissions(Map<String, Object> map);
+	List<OnlovPermission> queryCyclePermissionsListWithSelected(Integer rid);
+	List<OnlovPermission> loadUserCyclePermissionsTree(Integer userId);
+	List<OnlovPermission> updateUserCyclePermissionsTree(Integer userId);
 	void deleteByKeys(String[] keys);
 }

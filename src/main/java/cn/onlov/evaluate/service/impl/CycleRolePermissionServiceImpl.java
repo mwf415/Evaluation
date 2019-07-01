@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.service.impl;
 
-import cn.onlov.evaluate.core.dao.entities.RolePermission;
+import cn.onlov.evaluate.core.dao.entities.OnlovRolePermission;
 import cn.onlov.evaluate.core.dao.interfaces.IRolePermissionService;
 import cn.onlov.evaluate.service.CycleRolePermissionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -23,11 +23,11 @@ public class CycleRolePermissionServiceImpl  implements CycleRolePermissionServi
     @CacheEvict(cacheNames="permissions", allEntries=true)
     public void addRolePermission(Integer rid, Integer[] pids){
 
-		QueryWrapper<RolePermission> queryWrapper =  new QueryWrapper<>() ;
-		iRolePermissionService.remove(queryWrapper.lambda().eq(RolePermission::getRid,rid));
+		QueryWrapper<OnlovRolePermission> queryWrapper =  new QueryWrapper<>() ;
+		iRolePermissionService.remove(queryWrapper.lambda().eq(OnlovRolePermission::getRid,rid));
         //添加
         for(Integer pid: pids){
-			RolePermission record = new RolePermission();
+			OnlovRolePermission record = new OnlovRolePermission();
         	record.setRid(rid);
         	record.setPid(pid);
         	iRolePermissionService.save(record);
@@ -36,7 +36,7 @@ public class CycleRolePermissionServiceImpl  implements CycleRolePermissionServi
 
 	@Override
 	public void deleteByPermissionKeys(String[] ids) {
-		QueryWrapper<RolePermission> queryWrapper =  new QueryWrapper<>() ;
-		iRolePermissionService.remove(queryWrapper.lambda().in(RolePermission::getPid,ids));
+		QueryWrapper<OnlovRolePermission> queryWrapper =  new QueryWrapper<>() ;
+		iRolePermissionService.remove(queryWrapper.lambda().in(OnlovRolePermission::getPid,ids));
 	}
 }

@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Permission implements Serializable {
+public class OnlovPermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.core.dao.interfaces;
 
-import cn.onlov.evaluate.core.dao.entities.CycleRole;
+import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.List;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface IRoleService extends IService<CycleRole> {
+public interface IRoleService extends IService<OnlovRole> {
 
-    List<CycleRole> queryRoleListByUserId(Integer roleId);
+    List<OnlovRole> queryRoleListByUserId(Integer roleId);
 
 }

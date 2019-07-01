@@ -2,7 +2,7 @@ package cn.onlov.evaluate.util;
 
 
 
-import cn.onlov.evaluate.core.dao.entities.User;
+import cn.onlov.evaluate.core.dao.entities.OnlovUser;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
 public class PasswordHelper {
@@ -10,18 +10,18 @@ public class PasswordHelper {
 	private String algorithmName = "md5";
 	private int hashIterations = 2;
 
-	public void encryptPassword(User user) {
-//		String newPassword = new SimpleHash(algorithmName, user.getUserPwd(),  ByteSource.Util.bytes(Constants.SALT), hashIterations).toHex();
-		String newPassword = new SimpleHash(algorithmName, user.getUserPwd()).toHex();
-		user.setUserPwd(newPassword);
+	public void encryptPassword(OnlovUser onlovUser) {
+//		String newPassword = new SimpleHash(algorithmName, onlovUser.getUserPwd(),  ByteSource.Util.bytes(Constants.SALT), hashIterations).toHex();
+		String newPassword = new SimpleHash(algorithmName, onlovUser.getUserPwd()).toHex();
+		onlovUser.setUserPwd(newPassword);
 
 	}
 	public static void main(String[] args) {
 		PasswordHelper passwordHelper = new PasswordHelper();
-		User user = new User();
-		user.setLoginName("admin");
-			user.setUserPwd("123456");
-		passwordHelper.encryptPassword(user);
-		System.out.println(user.getUserPwd());
+		OnlovUser onlovUser = new OnlovUser();
+		onlovUser.setLoginName("admin");
+			onlovUser.setUserPwd("123456");
+		passwordHelper.encryptPassword(onlovUser);
+		System.out.println(onlovUser.getUserPwd());
 	}
 }

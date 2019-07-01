@@ -1,9 +1,10 @@
 package cn.onlov.evaluate.controller;
 
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
+import cn.onlov.evaluate.constants.Constants;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import cn.onlov.evaluate.core.dao.interfaces.IPermissionService;
-import cn.onlov.evaluate.pojo.bo.CyclePermissionBo;
+import cn.onlov.evaluate.pojo.bo.CycleOnlovPermissionBo;
 import cn.onlov.evaluate.service.CyclePermissionService;
 import cn.onlov.evaluate.shiro.ShiroService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -32,16 +33,16 @@ public class PermissionController {
     private ShiroService shiroService;
 
     @RequestMapping
-    public Map<String,Object> getAll(Permission permissions, String draw,
+    public Map<String,Object> getAll(OnlovPermission permissions, String draw,
                                      @RequestParam(required = false, defaultValue = "1") int start,
                                      @RequestParam(required = false, defaultValue = "10") int length){
         Map<String,Object> map = new HashMap<>();
-        CyclePermissionBo bo  = new CyclePermissionBo();
+        CycleOnlovPermissionBo bo  = new CycleOnlovPermissionBo();
         BeanUtils.copyProperties(permissions,bo);
         bo.setCurr(start);
         bo.setPageSize(length);
 
-        IPage<Permission> pageInfo = cyclePermissionService.selectByPage(bo);
+        IPage<OnlovPermission> pageInfo = cyclePermissionService.selectByPage(bo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -50,22 +51,23 @@ public class PermissionController {
     }
 
     @RequestMapping("/permissionsWithSelected")
-    public List<Permission> permissionsWithSelected(Integer rid){
+    public List<OnlovPermission> permissionsWithSelected(Integer rid){
         return cyclePermissionService.queryCyclePermissionsListWithSelected(rid);
     }
 
     @RequestMapping("/loadMenu")
-    public List<Permission> loadMenu(){
+    public List<OnlovPermission> loadMenu(){
         Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        List<Permission> permissionsList = cyclePermissionService.loadUserCyclePermissionsTree(userId);
+        List<OnlovPermission> permissionsList = cyclePermissionService.loadUserCyclePermissionsTree(userId);
         return permissionsList;
     }
 
     @CacheEvict(cacheNames="permissions", allEntries=true)
     @RequestMapping(value = "/add")
-    public String add(Permission permission){
+    public String add(OnlovPermission onlovPermission){
         try{
-            iPermissionService.saveOrUpdate(permission);
+            onlovPermission.setSystemId(Constants.SYSTEM_EVALUATE_ID);
+            iPermissionService.saveOrUpdate(onlovPermission);
             //更新权限
             shiroService.updatePermission();
             return "success";
@@ -77,9 +79,9 @@ public class PermissionController {
     
     @CacheEvict(cacheNames="permissions", allEntries=true)
     @RequestMapping(value = "/update")
-    public String update(Permission permission){
+    public String update(OnlovPermission onlovPermission){
         try{
-            iPermissionService.saveOrUpdate(permission);
+            iPermissionService.saveOrUpdate(onlovPermission);
             //更新权限
             shiroService.updatePermission();
             return "success";

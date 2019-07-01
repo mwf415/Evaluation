@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.core.dao.mapper;
 
 
-import cn.onlov.evaluate.core.dao.entities.UserRole;
+import cn.onlov.evaluate.core.dao.entities.OnlovUserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,6 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface CycleUserRoleMapper extends BaseMapper<UserRole> {
+public interface CycleUserRoleMapper extends BaseMapper<OnlovUserRole> {
 
 }

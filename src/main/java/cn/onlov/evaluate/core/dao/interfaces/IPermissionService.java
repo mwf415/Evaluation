@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.core.dao.interfaces;
 
-import cn.onlov.evaluate.core.dao.entities.Permission;
+import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
  * @author kaifa
  * @since 2019-01-04
  */
-public interface IPermissionService extends IService<Permission> {
+public interface IPermissionService extends IService<OnlovPermission> {
 
-    List<Permission> loadUserPermissions(int id, int type);
-    List<Permission> queryPermissionsListWithSelected(int rid);
+    List<OnlovPermission> loadUserPermissions(int id, int type,int systemId);
+    List<OnlovPermission> queryPermissionsListWithSelected(int rid,int systemId);
 
 
 }

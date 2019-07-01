@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.service.impl;
 
-import cn.onlov.evaluate.core.dao.entities.CycleRole;
+import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
-import cn.onlov.evaluate.pojo.bo.CycleRoleBo;
+import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
 import cn.onlov.evaluate.service.CycleRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -18,8 +18,8 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
     private IRoleService iRoleService;
 
     @Override
-    public List<CycleRole> queryCycleRoleListWithSelected(Integer uid) {
-        IPage<CycleRole> page = new Page<>();
+    public List<OnlovRole> queryCycleRoleListWithSelected(Integer uid) {
+        IPage<OnlovRole> page = new Page<>();
 //        page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
 //        boolean a = MyStringUtils.isNotEmpty(bo.getBaseName());
 
@@ -28,28 +28,28 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
     }
 
     @Override
-    public IPage<CycleRole> selectByPage(CycleRoleBo bo) {
-        QueryWrapper<CycleRole> queryWrapper =  new QueryWrapper<>() ;
+    public IPage<OnlovRole> selectByPage(OnlovRoleBo bo) {
+        QueryWrapper<OnlovRole> queryWrapper =  new QueryWrapper<>() ;
 
-        IPage<CycleRole> page = new Page<>();
+        IPage<OnlovRole> page = new Page<>();
         page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
 
-        IPage<CycleRole> res = iRoleService.page(page, new QueryWrapper<CycleRole>().lambda());
+        IPage<OnlovRole> res = iRoleService.page(page, new QueryWrapper<OnlovRole>().lambda());
 
         return res;
     }
 
     @Override
     public void delCycleRole(Integer roleid) {
-        QueryWrapper<CycleRole> queryWrapper =  new QueryWrapper<>();
-        iRoleService.remove(queryWrapper.lambda().eq(CycleRole::getRoleId ,roleid));
+        QueryWrapper<OnlovRole> queryWrapper =  new QueryWrapper<>();
+        iRoleService.remove(queryWrapper.lambda().eq(OnlovRole::getRoleId ,roleid));
     }
 
     @Override
-    public List<CycleRole> queryCycleRoleListByUserId(Integer userId) {
-        QueryWrapper<CycleRole> queryWrapper =  new QueryWrapper<>();
-        List<CycleRole> cycleRoles = iRoleService.queryRoleListByUserId(userId);
-        return cycleRoles;
+    public List<OnlovRole> queryCycleRoleListByUserId(Integer userId) {
+        QueryWrapper<OnlovRole> queryWrapper =  new QueryWrapper<>();
+        List<OnlovRole> onlovRoles = iRoleService.queryRoleListByUserId(userId);
+        return onlovRoles;
     }
 
 }

@@ -1,8 +1,8 @@
 package cn.onlov.evaluate.controller;
 
-import cn.onlov.evaluate.core.dao.entities.CycleRole;
+import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
-import cn.onlov.evaluate.pojo.bo.CycleRoleBo;
+import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
 import cn.onlov.evaluate.service.CycleRolePermissionService;
 import cn.onlov.evaluate.service.CycleRoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -35,18 +35,18 @@ public class RoleController {
     private IRoleService iRoleService;
 
     @RequestMapping
-    public  Map<String,Object> getAll(CycleRole role, String draw,
+    public  Map<String,Object> getAll(OnlovRole role, String draw,
                                       @RequestParam(required = false, defaultValue = "1") int start,
                                       @RequestParam(required = false, defaultValue = "10") int length){
 
         Map<String,Object> map = new HashMap<>();
 
-        CycleRoleBo bo  = new CycleRoleBo();
+        OnlovRoleBo bo  = new OnlovRoleBo();
         BeanUtils.copyProperties(role,bo);
         bo.setCurr(start);
         bo.setPageSize(length);
 
-        IPage<CycleRole> pageInfo = cycleRoleService.selectByPage(bo);
+        IPage<OnlovRole> pageInfo = cycleRoleService.selectByPage(bo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -55,7 +55,7 @@ public class RoleController {
     }
 
     @RequestMapping("/rolesWithSelected")
-    public List<CycleRole> rolesWithSelected(Integer uid){
+    public List<OnlovRole> rolesWithSelected(Integer uid){
         return cycleRoleService.queryCycleRoleListWithSelected(uid);
     }
 
@@ -74,7 +74,7 @@ public class RoleController {
     }
 
     @RequestMapping(value = "/add")
-    public String add(CycleRole role) {
+    public String add(OnlovRole role) {
         try {
             iRoleService.saveOrUpdate(role);
             return "success";
