@@ -25,13 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public IPage<OnlovUser> getBusinessPageUser(OnlovUserBo bo) {
         IPage<OnlovUser> page = new Page<>();
-        page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
-
-        System.out.println("getRealName = [" + MyStringUtils.isNotEmpty(bo.getRealName()));
-        System.out.println("getBaseName = [" +MyStringUtils.isNotEmpty(bo.getBaseName()));
-        System.out.println("getRoomName = [" +MyStringUtils.isNotEmpty(bo.getRoomName()));
-        System.out.println("getGrade = [" +MyStringUtils.isNotEmpty(bo.getGrade()));
-
+        page.setCurrent((bo.getCurr()/bo.getPageSize())+1).setSize(bo.getPageSize());
         IPage<OnlovUser> res = iUserService.page(page, new QueryWrapper<OnlovUser>().lambda()
                 .like(MyStringUtils.isNotEmpty(bo.getRealName()), OnlovUser:: getRealName , bo.getRealName())
                 .eq(MyStringUtils.isNotEmpty(bo.getBaseName()), OnlovUser:: getBaseName, bo.getBaseName())

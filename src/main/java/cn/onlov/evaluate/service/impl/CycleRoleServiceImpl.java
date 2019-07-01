@@ -4,6 +4,7 @@ import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
 import cn.onlov.evaluate.service.CycleRoleService;
+import cn.onlov.evaluate.util.MyPageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,7 +33,7 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
         QueryWrapper<OnlovRole> queryWrapper =  new QueryWrapper<>() ;
 
         IPage<OnlovRole> page = new Page<>();
-        page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
+        page.setCurrent(MyPageUtil.currPage(bo.getCurr(),bo.getPageSize())).setSize(bo.getPageSize());
 
         IPage<OnlovRole> res = iRoleService.page(page, new QueryWrapper<OnlovRole>().lambda());
 

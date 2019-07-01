@@ -28,7 +28,7 @@ public class CycleBaseServiceImpl  implements CycleBaseService {
     @Override
     public IPage<CycleBase> selectByPage(CycleBaseBo bo) {
         IPage<CycleBase> page = new Page<>();
-        page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
+        page.setCurrent((bo.getCurr()/bo.getPageSize())+1).setSize(bo.getPageSize());
 
         IPage<CycleBase> res = iCycleBaseService.page(page, new QueryWrapper<CycleBase>().lambda().orderByDesc(CycleBase::getId));
         return res;

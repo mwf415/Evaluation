@@ -28,14 +28,15 @@ public class CycleRoomServiceImpl  implements CycleRoomService {
 	public IPage<CycleRoom> selectByPage(CycleRoomBo bo) {
 
 		IPage<CycleRoom> page = new Page<>();
-		page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
+		page.setCurrent((bo.getCurr()/bo.getPageSize())+1).setSize(bo.getPageSize());
 		QueryWrapper<CycleRoom> queryWrapper = new QueryWrapper<>();
-		queryWrapper.lambda().like(MyStringUtils.isNotEmpty(bo.getValue()),CycleRoom::getValue,bo.getValue());
+		boolean notEmpty = MyStringUtils.isNotEmpty(bo.getValue());
+		queryWrapper.lambda().like(notEmpty,CycleRoom::getValue,bo.getValue());
 		IPage<CycleRoom> res = iCycleRoomService.page(page, new QueryWrapper<CycleRoom>().lambda().orderByDesc(CycleRoom::getId));
 		return res;
 
 }
-	
+
 	@Override
 	@Cacheable(value = "rooms", key = "'all_room'")
 	public List<CycleRoom> selectAll() {
@@ -54,5 +55,5 @@ public class CycleRoomServiceImpl  implements CycleRoomService {
 
 
 
-   
+
 }
