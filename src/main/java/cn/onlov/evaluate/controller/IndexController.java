@@ -95,71 +95,6 @@ public class IndexController {
         return "resources/resources";
     }
     
-    @RequestMapping("/stationsPage")
-    public String stationsPage(){
-        return "station/stations";
-    }
-    @RequestMapping("/groupsPage")
-    public String toolGroupPage(){
-    	return "group/groups";
-    }
-
-
-    @RequestMapping("/arrturnRulesPage")
-    public String applyPage(){
-        return "arrturn/rules";
-    }
-
-    @RequestMapping(value = "/arrturnRules/detail")
-    public String detail(String baseName,Model model){
-         model.addAttribute("baseName",baseName);
-        List<CycleRoom> cycleRooms = cycleRoomService.selectAll();
-        model.addAttribute("rooms",cycleRooms);
-        return "arrturn/rulesDetail";
-    }
-
-    @RequestMapping("/countPage")
-    public String countPage(Model model){
-        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        List<OnlovRole> roles = cycleRoleService.queryCycleRoleListByUserId(userId);
-        List<CycleBase> bases = cycleBaseService.selectAll();
-        List<CycleRoom> rooms = cycleRoomService.selectAll();
-        model.addAttribute("roles", roles);
-        model.addAttribute("bases", bases);
-        model.addAttribute("rooms", rooms);
-        return "count/index";
-    }
-
-    private Model indexSession(Model model) {
-        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        List<OnlovRole> roles = cycleRoleService.queryCycleRoleListByUserId(userId);
-        List<CycleBase> bases = cycleBaseService.selectAll();
-        List<CycleRoom> rooms = cycleRoomService.selectAll();
-        model.addAttribute("roles", roles);
-        model.addAttribute("bases", bases);
-        model.addAttribute("rooms", rooms);
-    return  model;
-    }
-
-
-    @RequestMapping("/arrturnPlan")
-    public String arrturnPlan(Model model){
-        List<CycleBase> bases = cycleBaseService.selectAll();
-        model.addAttribute("bases", bases);
-        return "/arrturn/plan";
-    }
-
-    @RequestMapping("/arrturnInfoPage")
-    public String arrturnInfoPage( Model model){
-
-        List<CycleBase> bases = cycleBaseService.selectAll();
-        List<CycleRoom> rooms = cycleRoomService.selectAll();
-        model.addAttribute("bases",bases);
-        model.addAttribute("rooms",rooms);
-        return "/arrturn/info";
-    }
-
-
 
 
     @RequestMapping("/basesPage")
@@ -176,30 +111,77 @@ public class IndexController {
         return "/room/rooms";
     }
 
-    @RequestMapping("/activesPages" )
-    public String activesPages(Integer type ,Model model){
-        model.addAttribute("status",type);
-
-        List<CycleBase> bases = cycleBaseService.selectAll();
-        List<CycleRoom> rooms = cycleRoomService.selectAll();
-        model.addAttribute("bases",bases);
-        model.addAttribute("rooms",rooms);
-        return "/actives/actives_index";
-    }
-
-
-    @RequestMapping("/activesDetailPage" )
-    public String activesDetailPage(String activesIdParm ,Model model){
-        model.addAttribute("activesIdParm",activesIdParm);
-        return "/actives/actives_detail";
-    }
-
 
     @RequestMapping("/403")
     public String forbidden(){
         return "403";
     }
 
+
+    /**
+     * 评估关系表
+     * @return
+     */
+
+    @RequestMapping("/evaluate/relate/page")
+    public String relate(){
+        return "relate/index";
+    }
+
+    /**
+     * 评估分类
+     * @return
+     */
+    @RequestMapping("/evaluate/catalog/page")
+    public String catalog(){
+        return "catalog/index";
+    }
+
+    /**
+     * 评估项
+     * @return
+     */
+    @RequestMapping("/evaluate/item/page")
+    public String item(){
+        return "item/index";
+    }
+
+    /**
+     * 评估表
+     * @return
+     */
+    @RequestMapping("/evaluate/table/page")
+    public String table(){
+        return "table/index";
+    }
+
+    /**
+     * 创建评估
+     * @return
+     */
+
+    @RequestMapping("/evaluate/createe/page")
+    public String createe(){
+        return "createe/index";
+    }
+
+    /**
+     * 查看已评估，待评估
+     * @return
+     */
+    @RequestMapping("/evaluate/load/page")
+    public String load(){
+        return "load/index";
+    }
+
+    /**
+     * 汇总统计
+     * @return
+     */
+ @RequestMapping("/evaluate/sum/page")
+    public String sum(){
+        return "sum/index";
+    }
 
 
 }
