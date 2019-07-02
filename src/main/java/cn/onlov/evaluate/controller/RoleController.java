@@ -1,5 +1,6 @@
 package cn.onlov.evaluate.controller;
 
+import cn.onlov.evaluate.constants.Constants;
 import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
@@ -77,6 +78,8 @@ public class RoleController {
     @RequestMapping(value = "/add")
     public String add(OnlovRole role) {
         try {
+            // 系统级别单独创建 systemID为  系统的ID
+            role.setSystemId(Constants.SYSTEM_EVALUATE_ID);
             iRoleService.saveOrUpdate(role);
             return "success";
         } catch (Exception e) {

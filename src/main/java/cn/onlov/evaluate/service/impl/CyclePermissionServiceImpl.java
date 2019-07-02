@@ -7,6 +7,7 @@ import cn.onlov.evaluate.core.dao.interfaces.IPermissionService;
 import cn.onlov.evaluate.core.dao.interfaces.IRolePermissionService;
 import cn.onlov.evaluate.pojo.bo.CycleOnlovPermissionBo;
 import cn.onlov.evaluate.service.CyclePermissionService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -57,8 +58,9 @@ public class CyclePermissionServiceImpl implements CyclePermissionService {
     @Override
     @Cacheable(value = "permissions", key = "'all_menu'")
     public List<OnlovPermission> queryAllMenu() {
-        QueryWrapper<OnlovPermission> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(OnlovPermission::getSystemId, Constants.SYSTEM_EVALUATE_ID).eq(OnlovPermission::getType, Constants.MENU_TYPE).orderByAsc(OnlovPermission::getId);
+        LambdaQueryWrapper<OnlovPermission> queryWrapper = new QueryWrapper<OnlovPermission>().lambda();
+        queryWrapper.in(OnlovPermission::getSystemId, Constants.THIS_SYSTEM_ID ,Constants.SYSTEM_MAIN_ID );
+        queryWrapper.eq(OnlovPermission::getType, Constants.MENU_TYPE).orderByAsc(OnlovPermission::getId);
         List<OnlovPermission> list = iPermissionService.list(queryWrapper);
         return list;
     }

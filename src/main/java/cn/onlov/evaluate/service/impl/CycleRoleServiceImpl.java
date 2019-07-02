@@ -1,10 +1,12 @@
 package cn.onlov.evaluate.service.impl;
 
+import cn.onlov.evaluate.constants.Constants;
 import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
 import cn.onlov.evaluate.service.CycleRoleService;
 import cn.onlov.evaluate.util.MyPageUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,10 +32,10 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
 
     @Override
     public IPage<OnlovRole> selectByPage(OnlovRoleBo bo) {
-        QueryWrapper<OnlovRole> queryWrapper =  new QueryWrapper<>() ;
-
+        LambdaQueryWrapper<OnlovRole> queryWrapper = new QueryWrapper<OnlovRole>().lambda();
         IPage<OnlovRole> page = new Page<>();
         page.setCurrent(MyPageUtil.currPage(bo.getCurr(),bo.getPageSize())).setSize(bo.getPageSize());
+        queryWrapper.in(OnlovRole::getSystemId,Constants.SYSTEM_MAIN_ID, Constants.SYSTEM_EVALUATE_ID);
 
         IPage<OnlovRole> res = iRoleService.page(page, new QueryWrapper<OnlovRole>().lambda());
 
