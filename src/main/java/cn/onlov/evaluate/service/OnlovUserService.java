@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
 
-public interface UserService {
+public interface OnlovUserService {
 
 	IPage<OnlovUser> getBusinessPageUser(OnlovUserBo bo) ;
 	

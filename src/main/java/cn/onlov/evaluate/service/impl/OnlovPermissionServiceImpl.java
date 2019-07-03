@@ -6,7 +6,7 @@ import cn.onlov.evaluate.core.dao.entities.OnlovRolePermission;
 import cn.onlov.evaluate.core.dao.interfaces.IPermissionService;
 import cn.onlov.evaluate.core.dao.interfaces.IRolePermissionService;
 import cn.onlov.evaluate.pojo.bo.CycleOnlovPermissionBo;
-import cn.onlov.evaluate.service.CyclePermissionService;
+import cn.onlov.evaluate.service.OnlovPermissionService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -27,7 +27,7 @@ import java.util.Map;
 
 @Service
 @Transactional
-public class CyclePermissionServiceImpl implements CyclePermissionService {
+public class OnlovPermissionServiceImpl implements OnlovPermissionService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Resource
     private IPermissionService iPermissionService;

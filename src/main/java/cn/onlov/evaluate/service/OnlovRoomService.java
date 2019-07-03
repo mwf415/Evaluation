@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by yangqj on 2017/4/25.
  */
-public interface CycleRoomService {
+public interface OnlovRoomService {
 	
 	IPage<CycleRoom> selectByPage(CycleRoomBo base);
 	List<CycleRoom> selectAll();

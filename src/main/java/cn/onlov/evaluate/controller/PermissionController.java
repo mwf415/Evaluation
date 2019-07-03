@@ -5,7 +5,7 @@ import cn.onlov.evaluate.constants.Constants;
 import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import cn.onlov.evaluate.core.dao.interfaces.IPermissionService;
 import cn.onlov.evaluate.pojo.bo.CycleOnlovPermissionBo;
-import cn.onlov.evaluate.service.CyclePermissionService;
+import cn.onlov.evaluate.service.OnlovPermissionService;
 import cn.onlov.evaluate.shiro.ShiroService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class PermissionController {
 
     @Resource
-    private CyclePermissionService cyclePermissionService;
+    private OnlovPermissionService onlovPermissionService;
     @Resource
     private IPermissionService iPermissionService;
     @Resource
@@ -42,7 +42,7 @@ public class PermissionController {
         bo.setCurr(start);
         bo.setPageSize(length);
 
-        IPage<OnlovPermission> pageInfo = cyclePermissionService.selectByPage(bo);
+        IPage<OnlovPermission> pageInfo = onlovPermissionService.selectByPage(bo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -52,13 +52,13 @@ public class PermissionController {
 
     @RequestMapping("/permissionsWithSelected")
     public List<OnlovPermission> permissionsWithSelected(Integer rid){
-        return cyclePermissionService.queryCyclePermissionsListWithSelected(rid);
+        return onlovPermissionService.queryCyclePermissionsListWithSelected(rid);
     }
 
     @RequestMapping("/loadMenu")
     public List<OnlovPermission> loadMenu(){
         Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        List<OnlovPermission> permissionsList = cyclePermissionService.loadUserCyclePermissionsTree(userId);
+        List<OnlovPermission> permissionsList = onlovPermissionService.loadUserCyclePermissionsTree(userId);
         return permissionsList;
     }
 
@@ -96,7 +96,7 @@ public class PermissionController {
     public String delete(String ids){
         try{
         	if(StringUtils.isNotBlank(ids)){
-        		cyclePermissionService.deleteByKeys(ids.split(","));
+        		onlovPermissionService.deleteByKeys(ids.split(","));
         		//更新权限
         		shiroService.updatePermission();
         		return "success";

@@ -4,7 +4,7 @@ import cn.onlov.evaluate.constants.Constants;
 import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
-import cn.onlov.evaluate.service.CycleRoleService;
+import cn.onlov.evaluate.service.OnlovRoleService;
 import cn.onlov.evaluate.util.MyPageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CycleRoleServiceImpl  implements CycleRoleService {
+public class OnlovRoleServiceImpl implements OnlovRoleService {
     @Autowired
     private IRoleService iRoleService;
 
@@ -35,9 +35,9 @@ public class CycleRoleServiceImpl  implements CycleRoleService {
         LambdaQueryWrapper<OnlovRole> queryWrapper = new QueryWrapper<OnlovRole>().lambda();
         IPage<OnlovRole> page = new Page<>();
         page.setCurrent(MyPageUtil.currPage(bo.getCurr(),bo.getPageSize())).setSize(bo.getPageSize());
-        queryWrapper.in(OnlovRole::getSystemId,Constants.SYSTEM_MAIN_ID, Constants.SYSTEM_EVALUATE_ID);
+        queryWrapper.in(OnlovRole::getSystemId,Constants.SYSTEM_MAIN_ID, Constants.THIS_SYSTEM_ID);
 
-        IPage<OnlovRole> res = iRoleService.page(page, new QueryWrapper<OnlovRole>().lambda());
+        IPage<OnlovRole> res = iRoleService.page(page, queryWrapper);
 
         return res;
     }

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by yangqj on 2017/4/25.
  */
-public interface CyclePermissionService  {
+public interface OnlovPermissionService {
 	IPage<OnlovPermission> selectByPage(CycleOnlovPermissionBo CyclePermission);
 	List<OnlovPermission> queryAll();
 	List<OnlovPermission> queryAllMenu();

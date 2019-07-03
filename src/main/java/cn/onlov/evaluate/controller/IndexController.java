@@ -25,13 +25,13 @@ public class IndexController {
 
 
 	@Resource
-	private UserService cycleUserService;
+	private OnlovUserService cycleOnlovUserService;
 	@Resource
-	private CycleRoleService cycleRoleService;
+	private OnlovRoleService onlovRoleService;
 	@Resource
-	private CycleBaseService cycleBaseService;
+	private OnlovBaseService onlovBaseService;
     @Resource
-    private CycleRoomService cycleRoomService;
+    private OnlovRoomService onlovRoomService;
 
 
     @RequestMapping(value="/login",method= RequestMethod.GET)
@@ -45,7 +45,7 @@ public class IndexController {
             request.setAttribute("msg", "用户名或密码不能为空！");
             return "/login";
         }
-        OnlovUser u = cycleUserService.selectByLoginName(onlovUser.getLoginName());
+        OnlovUser u = cycleOnlovUserService.selectByLoginName(onlovUser.getLoginName());
         if(u==null || u.getIdentityId()!= onlovUser.getIdentityId()){
             request.setAttribute("msg", "用户不存在！");
             return "/login";
@@ -77,8 +77,8 @@ public class IndexController {
 
     @RequestMapping(value="/usersPage")
     public String usersPage(Model model){
-        List<CycleBase> bases = cycleBaseService.selectAll();
-        List<CycleRoom> rooms = cycleRoomService.selectAll();
+        List<CycleBase> bases = onlovBaseService.selectAll();
+        List<CycleRoom> rooms = onlovRoomService.selectAll();
         model.addAttribute("bases",bases);
         model.addAttribute("rooms",rooms);
 
@@ -100,14 +100,14 @@ public class IndexController {
 
     @RequestMapping("/basesPage")
     public String baseStationItemsPage(Model model){
-    	List<CycleBase> bases = cycleBaseService.selectAll();
+    	List<CycleBase> bases = onlovBaseService.selectAll();
     	model.addAttribute("bases", bases);
         return "/base/bases";
     }
 
     @RequestMapping("/roomsPage")
     public String roomStationItemsPage(Model model){
-        List<CycleRoom> rooms = cycleRoomService.selectAll();
+        List<CycleRoom> rooms = onlovRoomService.selectAll();
         model.addAttribute("rooms", rooms);
         return "/room/rooms";
     }

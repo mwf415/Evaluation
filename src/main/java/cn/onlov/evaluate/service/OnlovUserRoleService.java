@@ -1,6 +1,6 @@
 package cn.onlov.evaluate.service;
 
 
-public interface CycleUserRoleService {
+public interface OnlovUserRoleService {
 	void addUserRole(long userId, Long[] roleIds);
 }

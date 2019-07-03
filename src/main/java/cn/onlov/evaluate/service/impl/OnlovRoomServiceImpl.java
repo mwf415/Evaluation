@@ -4,8 +4,9 @@ package cn.onlov.evaluate.service.impl;
 import cn.onlov.evaluate.core.dao.entities.CycleRoom;
 import cn.onlov.evaluate.core.dao.interfaces.ICycleRoomService;
 import cn.onlov.evaluate.pojo.bo.CycleRoomBo;
-import cn.onlov.evaluate.service.CycleRoomService;
+import cn.onlov.evaluate.service.OnlovRoomService;
 import cn.onlov.evaluate.util.MyStringUtils;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,12 +15,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @Transactional
-public class CycleRoomServiceImpl  implements CycleRoomService {
+public class OnlovRoomServiceImpl implements OnlovRoomService {
 	@Autowired
 	private ICycleRoomService iCycleRoomService;
 
@@ -29,10 +29,11 @@ public class CycleRoomServiceImpl  implements CycleRoomService {
 
 		IPage<CycleRoom> page = new Page<>();
 		page.setCurrent((bo.getCurr()/bo.getPageSize())+1).setSize(bo.getPageSize());
-		QueryWrapper<CycleRoom> queryWrapper = new QueryWrapper<>();
+		LambdaQueryWrapper<CycleRoom> queryWrapper = new QueryWrapper<CycleRoom>().lambda();
 		boolean notEmpty = MyStringUtils.isNotEmpty(bo.getValue());
-		queryWrapper.lambda().like(notEmpty,CycleRoom::getValue,bo.getValue());
-		IPage<CycleRoom> res = iCycleRoomService.page(page, new QueryWrapper<CycleRoom>().lambda().orderByDesc(CycleRoom::getId));
+		queryWrapper.like(notEmpty,CycleRoom::getValue,bo.getValue());
+		queryWrapper.orderByDesc(CycleRoom::getId);
+		IPage<CycleRoom> res = iCycleRoomService.page(page, queryWrapper);
 		return res;
 
 }

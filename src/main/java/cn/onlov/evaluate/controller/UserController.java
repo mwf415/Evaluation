@@ -3,8 +3,8 @@ package cn.onlov.evaluate.controller;
 import cn.onlov.evaluate.core.dao.entities.OnlovUser;
 import cn.onlov.evaluate.core.dao.interfaces.IUserService;
 import cn.onlov.evaluate.pojo.bo.OnlovUserBo;
-import cn.onlov.evaluate.service.CycleUserRoleService;
-import cn.onlov.evaluate.service.UserService;
+import cn.onlov.evaluate.service.OnlovUserRoleService;
+import cn.onlov.evaluate.service.OnlovUserService;
 import cn.onlov.evaluate.util.PasswordHelper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
@@ -26,12 +26,12 @@ import java.util.Map;
 @RequestMapping("/users")
 public class UserController {
     @Resource
-    private UserService userService;
+    private OnlovUserService onlovUserService;
     @Resource
     private IUserService iUserService;
 
     @Resource
-    private CycleUserRoleService userRoleService;
+    private OnlovUserRoleService userRoleService;
 
     @RequestMapping
     public Map<String,Object> getAll(OnlovUser onlovUser, String draw,
@@ -43,7 +43,7 @@ public class UserController {
         bo.setCurr(start);
         bo.setPageSize(length);
 
-        IPage<OnlovUser> pageInfo = userService.getBusinessPageUser(bo);
+        IPage<OnlovUser> pageInfo = onlovUserService.getBusinessPageUser(bo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -72,7 +72,7 @@ public class UserController {
 
     @RequestMapping(value = "/add")
     public String add(OnlovUser onlovUser) {
-        OnlovUser u = userService.selectByLoginName(onlovUser.getLoginName());
+        OnlovUser u = onlovUserService.selectByLoginName(onlovUser.getLoginName());
         if(u != null)
             return "error";
         try {
@@ -92,7 +92,7 @@ public class UserController {
     @RequestMapping(value = "/delete")
     public String delete(Integer id){
       try{
-          userService.delUser(id);
+          onlovUserService.delUser(id);
           return "success";
       }catch (Exception e){
           e.printStackTrace();
@@ -106,7 +106,7 @@ public class UserController {
                              String[] baseNames, String[] roomNames,
                              Integer[] identity_ids, Integer[] grades, Integer[] trainTimes){
       try{
-          List<OnlovUser> onlovUserList = userService.selectByLoginNames(loginNames);
+          List<OnlovUser> onlovUserList = onlovUserService.selectByLoginNames(loginNames);
           Map<String,Integer> map = new HashMap<>();
           for (int i = 0; i < loginNames.length; i++) {
             map.put(loginNames[i],i);

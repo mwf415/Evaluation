@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
-import cn.onlov.evaluate.service.CyclePermissionService;
+import cn.onlov.evaluate.service.OnlovPermissionService;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -23,7 +23,7 @@ public class ShiroService {
     @Autowired
     private ShiroFilterFactoryBean shiroFilterFactoryBean;
     @Autowired
-    private CyclePermissionService cyclePermissionService;
+    private OnlovPermissionService onlovPermissionService;
     /**
      * 初始化权限
      */
@@ -37,7 +37,7 @@ public class ShiroService {
         filterChainDefinitionMap.put("/myExams/**","authc");
         filterChainDefinitionMap.put("/plugins/**","anon");
         filterChainDefinitionMap.put("/font-awesome/**","anon");
-        List<OnlovPermission> permissionsList = cyclePermissionService.queryAll();
+        List<OnlovPermission> permissionsList = onlovPermissionService.queryAll();
         for(OnlovPermission permissions:permissionsList){
 
             if (!StringUtils.isEmpty(permissions.getUrl())) {

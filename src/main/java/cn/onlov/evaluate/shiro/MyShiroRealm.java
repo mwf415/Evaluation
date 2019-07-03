@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 
 import cn.onlov.evaluate.core.dao.entities.OnlovPermission;
 import cn.onlov.evaluate.core.dao.entities.OnlovUser;
-import cn.onlov.evaluate.service.CyclePermissionService;
-import cn.onlov.evaluate.service.UserService;
+import cn.onlov.evaluate.service.OnlovPermissionService;
+import cn.onlov.evaluate.service.OnlovUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -27,10 +27,10 @@ import org.apache.shiro.subject.PrincipalCollection;
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Resource
-    private UserService cycleUserService;
+    private OnlovUserService cycleOnlovUserService;
 
     @Resource
-    private CyclePermissionService cyclePermissionService;
+    private OnlovPermissionService onlovPermissionService;
 
     //授权
     @Override
@@ -41,9 +41,9 @@ public class MyShiroRealm extends AuthorizingRealm {
         map.put("id",userId);
         List<OnlovPermission> loadUserOnlovPermissions = null;
         if(userId == 1){
-        	loadUserOnlovPermissions = cyclePermissionService.queryAll();
+        	loadUserOnlovPermissions = onlovPermissionService.queryAll();
         }else{
-        	loadUserOnlovPermissions = cyclePermissionService.loadUserCyclePermissions(map);
+        	loadUserOnlovPermissions = onlovPermissionService.loadUserCyclePermissions(map);
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         for(OnlovPermission permissions : loadUserOnlovPermissions){
@@ -57,7 +57,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
     	//获取用户的输入的账号.
         String loginName = (String)authcToken.getPrincipal();
-        OnlovUser onlovUser = cycleUserService.selectByLoginName(loginName);
+        OnlovUser onlovUser = cycleOnlovUserService.selectByLoginName(loginName);
         if(onlovUser ==null) throw new UnknownAccountException();
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 onlovUser, //用户

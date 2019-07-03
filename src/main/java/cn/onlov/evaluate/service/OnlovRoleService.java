@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
 
-public interface CycleRoleService  {
+public interface OnlovRoleService {
 
     public List<OnlovRole> queryCycleRoleListWithSelected(Integer uid);
 

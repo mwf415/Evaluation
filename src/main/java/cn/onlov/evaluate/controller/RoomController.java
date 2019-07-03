@@ -3,7 +3,7 @@ package cn.onlov.evaluate.controller;
 import cn.onlov.evaluate.core.dao.entities.CycleRoom;
 import cn.onlov.evaluate.core.dao.interfaces.ICycleRoomService;
 import cn.onlov.evaluate.pojo.bo.CycleRoomBo;
-import cn.onlov.evaluate.service.CycleRoomService;
+import cn.onlov.evaluate.service.OnlovRoomService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import org.springframework.beans.BeanUtils;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/rooms")
 public class RoomController {
     @Resource
-    private CycleRoomService cycleRoomService;
+    private OnlovRoomService onlovRoomService;
     @Resource
     private ICycleRoomService iCycleRoomService;
     @RequestMapping
@@ -36,7 +36,7 @@ public class RoomController {
         BeanUtils.copyProperties(room,cycleRoomBo);
         cycleRoomBo.setCurr(start);
         cycleRoomBo.setPageSize(length);
-        IPage<CycleRoom> pageInfo = cycleRoomService.selectByPage(cycleRoomBo);
+        IPage<CycleRoom> pageInfo = onlovRoomService.selectByPage(cycleRoomBo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -53,7 +53,7 @@ public class RoomController {
 
         List<CycleRoom> list = null;
         try {
-            list = cycleRoomService.selectAll();
+            list = onlovRoomService.selectAll();
             success = true;
             data = list;
             msg = "获取数据成功";
@@ -81,7 +81,7 @@ public class RoomController {
     @RequestMapping(value = "/delete")
     public String delete(Integer id){
         try{
-            cycleRoomService.deleteByKey(id);
+            onlovRoomService.deleteByKey(id);
             return "success";
         }catch (Exception e){
             e.printStackTrace();

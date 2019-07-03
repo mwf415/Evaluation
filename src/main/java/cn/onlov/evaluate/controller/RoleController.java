@@ -4,9 +4,8 @@ import cn.onlov.evaluate.constants.Constants;
 import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
-import cn.onlov.evaluate.service.CycleRolePermissionService;
-import cn.onlov.evaluate.service.CycleRoleService;
-import cn.onlov.evaluate.util.MyPageUtil;
+import cn.onlov.evaluate.service.OnlovRolePermissionService;
+import cn.onlov.evaluate.service.OnlovRoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import org.springframework.beans.BeanUtils;
@@ -28,9 +27,9 @@ import java.util.Map;
 @RequestMapping("/roles")
 public class RoleController {
     @Resource
-    private CycleRoleService cycleRoleService;
+    private OnlovRoleService onlovRoleService;
     @Resource
-    private CycleRolePermissionService cycleRolePermissionService;
+    private OnlovRolePermissionService onlovRolePermissionService;
 
 
     @Autowired
@@ -48,7 +47,7 @@ public class RoleController {
         bo.setCurr(start);
         bo.setPageSize(length);
 
-        IPage<OnlovRole> pageInfo = cycleRoleService.selectByPage(bo);
+        IPage<OnlovRole> pageInfo = onlovRoleService.selectByPage(bo);
         map.put("draw",draw);
         map.put("recordsTotal",pageInfo.getTotal());
         map.put("recordsFiltered",pageInfo.getTotal());
@@ -58,7 +57,7 @@ public class RoleController {
 
     @RequestMapping("/rolesWithSelected")
     public List<OnlovRole> rolesWithSelected(Integer uid){
-        return cycleRoleService.queryCycleRoleListWithSelected(uid);
+        return onlovRoleService.queryCycleRoleListWithSelected(uid);
     }
 
     //分配角色
@@ -67,7 +66,7 @@ public class RoleController {
         if(StringUtils.isEmpty(rid))
             return "error";
         try {
-            cycleRolePermissionService.addRolePermission(rid, pids);
+            onlovRolePermissionService.addRolePermission(rid, pids);
             return "success";
         } catch (Exception e) {
             e.printStackTrace();

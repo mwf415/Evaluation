@@ -2,7 +2,7 @@ package cn.onlov.evaluate.service.impl;
 
 import cn.onlov.evaluate.core.dao.entities.OnlovRolePermission;
 import cn.onlov.evaluate.core.dao.interfaces.IRolePermissionService;
-import cn.onlov.evaluate.service.CycleRolePermissionService;
+import cn.onlov.evaluate.service.OnlovRolePermissionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class CycleRolePermissionServiceImpl  implements CycleRolePermissionService {
+public class OnlovRolePermissionServiceImpl implements OnlovRolePermissionService {
    @Autowired
    private IRolePermissionService iRolePermissionService;
 

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by yangqj on 2017/4/25.
  */
-public interface CycleBaseService{
+public interface OnlovBaseService {
 	IPage<CycleBase> selectByPage(CycleBaseBo base);
 	List<CycleBase> selectAll();
 	void deleteByKey(Integer key);

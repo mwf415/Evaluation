@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.service;
 
 
-public interface CycleRolePermissionService  {
+public interface OnlovRolePermissionService {
 
     public void addRolePermission(Integer rid, Integer[] pids);
 

@@ -2,8 +2,8 @@ package cn.onlov.evaluate.service.impl;
 
 import cn.onlov.evaluate.core.dao.entities.OnlovUserRole;
 import cn.onlov.evaluate.core.dao.interfaces.IUserRoleService;
-import cn.onlov.evaluate.service.CyclePermissionService;
-import cn.onlov.evaluate.service.CycleUserRoleService;
+import cn.onlov.evaluate.service.OnlovPermissionService;
+import cn.onlov.evaluate.service.OnlovUserRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,10 +12,10 @@ import javax.annotation.Resource;
 
 @Service
 @Transactional
-public class UserRoleServiceImpl implements CycleUserRoleService {
+public class UserRoleServiceImpl implements OnlovUserRoleService {
 
     @Resource
-    private CyclePermissionService cyclePermissionService;
+    private OnlovPermissionService onlovPermissionService;
 
     @Resource
     private IUserRoleService iUserRoleService;
@@ -40,7 +40,7 @@ public class UserRoleServiceImpl implements CycleUserRoleService {
          * 更新权限
          */
         // 权限redis更新
-        cyclePermissionService.updateUserCyclePermissionsTree((int) userId);
+        onlovPermissionService.updateUserCyclePermissionsTree((int) userId);
 
     }
 }

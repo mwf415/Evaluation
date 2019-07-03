@@ -3,7 +3,7 @@ package cn.onlov.evaluate.service.impl;
 import cn.onlov.evaluate.core.dao.entities.OnlovUser;
 import cn.onlov.evaluate.core.dao.interfaces.IUserService;
 import cn.onlov.evaluate.pojo.bo.OnlovUserBo;
-import cn.onlov.evaluate.service.UserService;
+import cn.onlov.evaluate.service.OnlovUserService;
 import cn.onlov.evaluate.util.MyStringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Service
-public class UserServiceImpl implements UserService {
+public class OnlovUserServiceImpl implements OnlovUserService {
     @Resource
     private IUserService iUserService;
 

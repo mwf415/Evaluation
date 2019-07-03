@@ -52,6 +52,7 @@
                                 </th>
                                 <th>ID</th>
                                 <th>角色名称</th>
+                                <th>所属系统</th>
                             </tr>
                             </thead>
                         	</table>
@@ -154,6 +155,23 @@
                 },
                 { "data": "roleId" },
                 { "data": "roleName" },
+                { "data": "systemId" ,
+                    "render": function ( data, type, full, meta ) {
+                        var status = "";
+                        if(data==0){  //  状态 0 报废  1 是可以借用，2 借用中   3 使用结束未归还  4 使用造成损坏。  5 维修中
+                            status = "主系统";
+                        }else if(data==1){
+                            status = "考试系统";
+                        }else if(data==2){
+                            status = "规培系统";
+                        }else if(data==3){
+                            status = "osce系统";
+                        }else if(data==4){
+                            status = "360考评";
+                        }
+                        return status;
+                    }
+                },
             ],
             columnDefs:[
                 { "orderable": false, "targets": 1 },
