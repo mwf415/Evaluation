@@ -87,6 +87,7 @@ public class IndexController {
 
     @RequestMapping("/rolesPage")
     public String rolesPage(){
+
         return "role/roles";
     }
 
@@ -123,7 +124,7 @@ public class IndexController {
      * @return
      */
 
-    @RequestMapping("/evaluate/relate/page")
+    @RequestMapping("/evaluateRelatePage")
     public String relate(){
         return "relate/index";
     }
@@ -132,7 +133,7 @@ public class IndexController {
      * 评估分类
      * @return
      */
-    @RequestMapping("/evaluate/catalog/page")
+    @RequestMapping("/evaluateCcatalogPage")
     public String catalog(){
         return "catalog/index";
     }
@@ -141,8 +142,9 @@ public class IndexController {
      * 评估项
      * @return
      */
-    @RequestMapping("/evaluate/item/page")
+    @RequestMapping("/evaluateItemPage")
     public String item(){
+
         return "item/index";
     }
 
@@ -150,7 +152,7 @@ public class IndexController {
      * 评估表
      * @return
      */
-    @RequestMapping("/evaluate/table/page")
+    @RequestMapping("/evaluateTablePage")
     public String table(){
         return "table/index";
     }
@@ -160,9 +162,9 @@ public class IndexController {
      * @return
      */
 
-    @RequestMapping("/evaluate/createe/page")
+    @RequestMapping("/evaluateCreatePage")
     public String createe(){
-        return "createe/index";
+        return "create/index";
     }
 
     /**

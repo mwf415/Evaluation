@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("cn.onlov.evaluate.dao.mapper.*")
+@MapperScan("cn.onlov.evaluatemodel.dao.mapper.*")
 public class MybatisPlusConfig {
 
     /**

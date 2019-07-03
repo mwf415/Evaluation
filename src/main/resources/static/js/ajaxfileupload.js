@@ -212,7 +212,7 @@ jQuery.extend({
             var data = (am) ? am[1] : "";    //the only submatch or empty
             eval( "data = " + data );
         }
-        // evaluate scripts within html
+        // evaluatemodel scripts within html
         if ( type == "html" )
             jQuery("<div>").html(data).evalScripts();
         //alert($('param', data).each(function(){alert($(this).attr('value'));}));
