@@ -5,7 +5,7 @@ import cn.onlov.evaluate.core.dao.entities.CycleRoom;
 import cn.onlov.evaluate.core.dao.interfaces.ICycleRoomService;
 import cn.onlov.evaluate.pojo.bo.CycleRoomBo;
 import cn.onlov.evaluate.service.OnlovRoomService;
-import cn.onlov.evaluate.util.MyStringUtils;
+import cn.onlov.utils.OnStringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,7 +30,7 @@ public class OnlovRoomServiceImpl implements OnlovRoomService {
 		IPage<CycleRoom> page = new Page<>();
 		page.setCurrent((bo.getCurr()/bo.getPageSize())+1).setSize(bo.getPageSize());
 		LambdaQueryWrapper<CycleRoom> queryWrapper = new QueryWrapper<CycleRoom>().lambda();
-		boolean notEmpty = MyStringUtils.isNotEmpty(bo.getValue());
+		boolean notEmpty = OnStringUtils.isNotEmpty(bo.getValue());
 		queryWrapper.like(notEmpty,CycleRoom::getValue,bo.getValue());
 		queryWrapper.orderByDesc(CycleRoom::getId);
 		IPage<CycleRoom> res = iCycleRoomService.page(page, queryWrapper);

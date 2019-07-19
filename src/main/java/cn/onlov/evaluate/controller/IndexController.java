@@ -2,7 +2,7 @@ package cn.onlov.evaluate.controller;
 
 import cn.onlov.evaluate.core.dao.entities.*;
 import cn.onlov.evaluate.service.*;
-import cn.onlov.evaluate.util.MyStringUtils;
+import cn.onlov.utils.OnStringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -41,7 +41,7 @@ public class IndexController {
 
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public String login(HttpServletRequest request, OnlovUser onlovUser, Model model){
-        if ( !MyStringUtils.isNotEmpty(onlovUser.getLoginName()) || !MyStringUtils.isNotEmpty(onlovUser.getUserPwd())) {
+        if ( !OnStringUtils.isNotEmpty(onlovUser.getLoginName()) || !OnStringUtils.isNotEmpty(onlovUser.getUserPwd())) {
             request.setAttribute("msg", "用户名或密码不能为空！");
             return "/login";
         }

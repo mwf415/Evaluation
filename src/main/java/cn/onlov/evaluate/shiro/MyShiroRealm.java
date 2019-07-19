@@ -35,7 +35,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        OnlovUser onlovUser = (OnlovUser) SecurityUtils.getSubject().getPrincipal();//OnlovUser{id=1, username='admin', password='3ef7164d1f6167cb9f2658c07d3c2f0a', enable=1}
+        OnlovUser onlovUser = (OnlovUser) SecurityUtils.getSubject().getPrincipal();//OnlovUser{id=1, username='evaluate', password='3ef7164d1f6167cb9f2658c07d3c2f0a', enable=1}
         Integer userId = onlovUser.getId();
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("id",userId);

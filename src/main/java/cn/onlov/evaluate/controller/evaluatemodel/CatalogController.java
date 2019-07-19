@@ -2,7 +2,8 @@ package cn.onlov.evaluate.controller.evaluatemodel;
 
 import cn.onlov.evaluate.core.dao.entities.ECatalog;
 import cn.onlov.evaluate.core.dao.interfaces.IECatalogService;
-import cn.onlov.evaluate.util.MyPageUtil;
+
+import cn.onlov.utils.MyPageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;

@@ -5,7 +5,7 @@ import cn.onlov.evaluate.core.dao.entities.OnlovRole;
 import cn.onlov.evaluate.core.dao.interfaces.IRoleService;
 import cn.onlov.evaluate.pojo.bo.OnlovRoleBo;
 import cn.onlov.evaluate.service.OnlovRoleService;
-import cn.onlov.evaluate.util.MyPageUtil;
+import cn.onlov.utils.MyPageUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,7 +24,7 @@ public class OnlovRoleServiceImpl implements OnlovRoleService {
     public List<OnlovRole> queryCycleRoleListWithSelected(Integer uid) {
         IPage<OnlovRole> page = new Page<>();
 //        page.setCurrent(bo.getCurr()).setSize(bo.getPageSize());
-//        boolean a = MyStringUtils.isNotEmpty(bo.getBaseName());
+//        boolean a = OnStringUtils.isNotEmpty(bo.getBaseName());
 
 
         return null;

@@ -1,7 +1,7 @@
 package cn.onlov.evaluate.core.dao.entities;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
+
 import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.*;
 
