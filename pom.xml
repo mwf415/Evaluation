@@ -26,6 +26,14 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.onlov</groupId>
+            <artifactId>on_common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+
         <!-- Spring Boot Freemarker 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
