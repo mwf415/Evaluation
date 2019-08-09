@@ -65,13 +65,13 @@ public class IndexController {
         } catch (AuthenticationException e) {
             request.setAttribute("msg", "用户或密码不正确！");
         }
-        
+
         if(token!=null){
         	token.clear();
         }
         return "login";
-        
-        
+
+
     }
 
 
@@ -95,7 +95,7 @@ public class IndexController {
     public String permissionsPage(){
         return "resources/resources";
     }
-    
+
 
 
     @RequestMapping("/basesPage")
