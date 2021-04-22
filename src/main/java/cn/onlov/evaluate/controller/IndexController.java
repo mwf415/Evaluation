@@ -3,6 +3,7 @@ package cn.onlov.evaluate.controller;
 import cn.onlov.evaluate.core.dao.entities.*;
 import cn.onlov.evaluate.service.*;
 import cn.onlov.utils.OnStringUtils;
+import com.sun.media.jfxmedia.logging.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -56,13 +57,16 @@ public class IndexController {
         	if(onlovUser.getUserPwd()!=null){
         		token=new UsernamePasswordToken(onlovUser.getLoginName(), onlovUser.getUserPwd());
         		subject.login(token);
-        		if(onlovUser.getIdentityId()==2)//如果是学生，跳转到学生页面
-        			return "redirect:/myExams/examsPage";
+        		if(onlovUser.getIdentityId()==2) {//如果是学生，跳转到学生页面
+                    return "redirect:/myExams/examsPage";
+                }
         		return "redirect:usersPage";
         	}
         }catch (LockedAccountException lae) {
+            System.out.println("request = " + request + ", onlovUser = " + onlovUser + ", model = " + model);
             request.setAttribute("msg", "用户已经被锁定不能登录，请与管理员联系！");
         } catch (AuthenticationException e) {
+
             request.setAttribute("msg", "用户或密码不正确！");
         }
 
